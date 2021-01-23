@@ -2,7 +2,7 @@ provider "google" {
   project = var.project
   region  = var.region
   zone    = var.zone
-  credentials = file("../secrets/terraform-docker-cicd.json")
+  credentials = file("terraform-docker-cicd.json")
 }
 
 terraform {
@@ -11,7 +11,12 @@ terraform {
               source = "hashicorp/google"
               version = "3.53.0"
             }
-}
+    }
+    backend "gcs" {
+      bucket = "terraform-bucket-9322"
+      prefix = "terraform/state"
+      credentials = "terraform-docker-cicd.json"
+    }
 }
 
 resource "google_compute_instance" "vm_instance" {
