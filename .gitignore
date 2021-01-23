@@ -1,2 +1,4 @@
-secrets/*.json
+# removing any secrets from accidental commit.
+tf_include/*.json
+# removing any local .terraform files that may have been included.
 tf_include/.terraform*
